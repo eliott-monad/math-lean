@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: sorry-free gate
+        run: |
+          # Math/ must never contain sorry / admit. candidates/ is exempt.
+          if grep -rnE '\b(sorry|admit)\b' Math/; then
+            echo "::error::found sorry/admit in Math/ — formal results must be complete"
+            exit 1
+          fi
+          echo "sorry-free gate passed"
+
+      - name: install elan (Lean toolchain manager)
+        run: |
+          curl -sSfL https://github.com/leanprover/elan/releases/latest/download/elan-x86_64-unknown-linux-gnu.tar.gz \
+            | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: build
+        run: lake build
