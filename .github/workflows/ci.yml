@@ -14,12 +14,23 @@ jobs:
 
       - name: sorry-free gate
         run: |
-          # Math/ must never contain sorry / admit. candidates/ is exempt.
-          if grep -rnE '\b(sorry|admit)\b' Math/; then
-            echo "::error::found sorry/admit in Math/ — formal results must be complete"
-            exit 1
-          fi
-          echo "sorry-free gate passed"
+          # Math/ must never contain a real sorry / admit. candidates/ is exempt.
+          # Strip Lean comments first so prose mentions ("keep this `sorry`-free") don't trip it.
+          python3 - <<'PY'
+          import re, sys, pathlib
+          bad = []
+          for f in sorted(pathlib.Path("Math").rglob("*.lean")):
+              src = f.read_text()
+              src = re.sub(r"/-.*?-/", "", src, flags=re.S)   # block comments
+              src = re.sub(r"--[^\n]*", "", src)               # line comments
+              for i, line in enumerate(src.splitlines(), 1):
+                  if re.search(r"\b(sorry|admit)\b", line):
+                      bad.append(f"{f}:{i}: {line.strip()}")
+          if bad:
+              print("::error::found sorry/admit in Math/ (comments excluded):")
+              print("\n".join(bad)); sys.exit(1)
+          print("sorry-free gate passed")
+          PY
 
       - name: install elan (Lean toolchain manager)
         run: |
