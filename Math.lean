@@ -18,3 +18,4 @@ import Math.LonelyRunner.UnitClock
 import Math.LonelyRunner.DangerCount
 import Math.Collatz.Resonance
 import Math.Collatz.Parity
+import Math.IteratedLog.Altitude
