@@ -1,7 +1,7 @@
 /-
 # Lonely Runner — the covering-depth master object and the additive-chain resonance link
 
-Provenance: `eliottcassidy2000/math` — HYP-2190 (S617).  A loneliness certificate is a clock time
+Provenance: `eliottcassidy2000/math` — HYP-2195 (S617).  A loneliness certificate is a clock time
 `t` avoiding every runner's *forbidden arc* `{t : ‖vᵢ t‖ < δ}` (`‖·‖` = distance to the nearest
 integer, the clock metric), so LRC at gap `δ` is a **circular-arc covering** problem.  The master
 object is the covering-depth distribution `p_k = meas{t : depth(t) = k}`, `depth(t) = #{i : ‖vᵢt‖ <
