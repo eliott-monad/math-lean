@@ -5,6 +5,7 @@
 import Math.Tournaments.Basic
 import Math.Tournaments.HamiltonianPaths
 import Math.Tournaments.Inshat
+import Math.Tournaments.IndependencePolynomial
 import Math.FormalGroup.Basic
 import Math.PathHomology.Basic
 import Math.Krawtchouk.Basic
