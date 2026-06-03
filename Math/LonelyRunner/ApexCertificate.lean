@@ -289,4 +289,79 @@ example (S : Finset (ZMod 3)ˣ) (hS : S.card = 1) : (certificates S).card = 2 :=
 
 end Examples
 
+/-! ## The sheaf: restriction, gluing, and the apex as the gluing obstruction
+
+The sections above build the *stalk* — the certificate locus at a single runner (the apex
+trichotomy) and its `r/p` lift.  Here we assemble the **sheaf**: the certificate locus of a
+*family* of runners indexed by a base `s : Finset ι` (the lanes of the n-gon).  It carries the
+presheaf **restriction** (more lanes ⇒ fewer certificates, antitone) and satisfies the **gluing
+law** `CertLocus (s ∪ t) = CertLocus s ∩ CertLocus t` — the sheaf condition for the "avoid every
+forbidden set" presheaf.  The global sections are the certificates surviving every lane; the
+**apex lane** (whole-plane forbidder) empties them — the gluing obstruction concentrated at the
+self-antipodal seam — and the `r/p` lift is exactly what restores a nonempty stalk there. -/
+
+section Sheaf
+
+variable {ι X : Type*}
+
+/-- The **certificate locus** of a family of forbidden sets `F` over a base `s`: the points
+avoiding every forbidden set indexed by `s`.  (All lanes ⇒ the global sections; a singleton ⇒ a
+single stalk.) -/
+def CertLocus (F : ι → Set X) (s : Finset ι) : Set X := {p | ∀ i ∈ s, p ∉ F i}
+
+/-- The certificate locus over a single lane is the complement of that lane's forbidden set. -/
+theorem certLocus_singleton (F : ι → Set X) (i : ι) :
+    CertLocus F {i} = (F i)ᶜ := by
+  ext p; simp [CertLocus]
+
+/-- **Restriction (the presheaf map).**  More lanes ⇒ fewer certificates: `s ⊆ t` gives
+`CertLocus F t ⊆ CertLocus F s`.  The certificate presheaf is *antitone* in the base. -/
+theorem certLocus_antitone (F : ι → Set X) {s t : Finset ι} (h : s ⊆ t) :
+    CertLocus F t ⊆ CertLocus F s :=
+  fun _ hp i hi => hp i (h hi)
+
+/-- **The gluing law (sheaf axiom).**  The certificate locus over a union of bases is the
+intersection of the loci: a certificate is global iff it is a certificate on each piece of a
+cover.  This is the sheaf condition for the "avoid every forbidden set" presheaf. -/
+theorem certLocus_union [DecidableEq ι] (F : ι → Set X) (s t : Finset ι) :
+    CertLocus F (s ∪ t) = CertLocus F s ∩ CertLocus F t := by
+  ext p
+  constructor
+  · intro h
+    exact ⟨fun i hi => h i (Finset.mem_union_left t hi),
+           fun i hi => h i (Finset.mem_union_right s hi)⟩
+  · rintro ⟨h1, h2⟩ i hi
+    rcases Finset.mem_union.mp hi with hi | hi
+    exacts [h1 i hi, h2 i hi]
+
+/-- **The apex obstruction.**  If any lane `j ∈ s` is the apex — its forbidden set is the whole
+space — then the global certificate locus is empty: no section can be glued past the apex seam.
+(The sheaf-level form of `no_certificate_of_apex`.) -/
+theorem certLocus_eq_empty_of_apex (F : ι → Set X) {s : Finset ι} {j : ι}
+    (hj : j ∈ s) (hapex : F j = Set.univ) : CertLocus F s = ∅ := by
+  ext p
+  simp only [CertLocus, Set.mem_setOf_eq, Set.mem_empty_iff_false, iff_false, not_forall]
+  exact ⟨j, hj, not_not.mpr (by rw [hapex]; exact Set.mem_univ p)⟩
+
+/-- **Geometric apex obstruction.**  Specialised to runner forbidden lines: a lane `j` whose
+covector and target both vanish (`a j = b j = c j = 0`, the degenerate apex of
+`forbidden_univ_iff`) empties the global certificate locus. -/
+theorem certLocus_empty_of_apex_runner {K : Type*} [Field K] (a b c : ι → K)
+    {s : Finset ι} {j : ι} (hj : j ∈ s) (h0 : a j = 0 ∧ b j = 0 ∧ c j = 0) :
+    CertLocus (fun i => Forbidden (a i) (b i) (c i)) s = ∅ :=
+  certLocus_eq_empty_of_apex _ hj ((forbidden_univ_iff (a j) (b j) (c j)).2 h0)
+
+/-- **Apex-lift restores the stalk.**  In the lift, the apex's forbidden set is the *proper*
+hyperplane `Forbidden3 0 0 d 0` (`d ≠ 0`), so its certificate locus — the complement — is
+nonempty: the point `(0,0,1)` avoids it.  Contrast `certLocus_eq_empty_of_apex`: the `r/p` lift
+turns the section-killing whole-plane apex into a stalk that *has* sections, which is precisely
+why the global section can be glued in the lifted arrangement. -/
+theorem certLocus_apex_lift_nonempty {K : Type*} [Field K] (d : K) (hd : d ≠ 0) :
+    (CertLocus (fun _ : Unit => Forbidden3 (0 : K) 0 d 0) {()}).Nonempty := by
+  refine ⟨(0, 0, 1), fun i _ hmem => ?_⟩
+  simp only [Forbidden3, Set.mem_setOf_eq, mul_zero, zero_add, mul_one] at hmem
+  exact hd hmem
+
+end Sheaf
+
 end Math.LonelyRunner
