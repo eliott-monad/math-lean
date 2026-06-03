@@ -16,6 +16,7 @@ import Math.LonelyRunner.FractalSumFree
 import Math.LonelyRunner.DangerBlocks
 import Math.LonelyRunner.UnitClock
 import Math.LonelyRunner.DangerCount
+import Math.LonelyRunner.CoveringDepth
 import Math.Collatz.Resonance
 import Math.Collatz.Parity
 import Math.IteratedLog.Altitude
