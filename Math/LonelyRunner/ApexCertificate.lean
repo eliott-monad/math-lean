@@ -76,7 +76,131 @@ theorem no_certificate_of_apex {ι : Type*} (a b c : ι → K) (j : ι)
   simp only [Set.mem_setOf_eq, Set.mem_empty_iff_false, iff_false, not_forall, not_not]
   exact ⟨j, by rw [hj]; exact Set.mem_univ p⟩
 
+/-! ### The apex trichotomy completed: empty / whole plane / proper line
+
+`forbidden_univ_iff` is the degenerate whole-plane (apex) case.  Here are the other two thirds:
+the inconsistent (empty) case, and the generic **transversal** case — a proper line, whose
+cardinality is `|K|` (codimension 1).  These hold over any field; for finite `K` they read as
+"empty / all of `K²` / exactly `q` points". -/
+
+/-- A runner forbids the *empty* set iff it is the inconsistent `0 = c ≠ 0` condition. -/
+theorem forbidden_empty_iff (a b c : K) :
+    Forbidden a b c = ∅ ↔ a = 0 ∧ b = 0 ∧ c ≠ 0 := by
+  constructor
+  · intro h
+    refine ⟨?_, ?_, ?_⟩
+    · by_contra ha
+      have : ((c / a, 0) : K × K) ∈ Forbidden a b c := by
+        simp only [Forbidden, Set.mem_setOf_eq, mul_zero, add_zero]
+        exact mul_div_cancel₀ c ha
+      rw [h] at this; exact this
+    · by_contra hb
+      have : ((0, c / b) : K × K) ∈ Forbidden a b c := by
+        simp only [Forbidden, Set.mem_setOf_eq, mul_zero, zero_add]
+        exact mul_div_cancel₀ c hb
+      rw [h] at this; exact this
+    · intro hc
+      have huniv : Forbidden a b c = Set.univ := by
+        refine (forbidden_univ_iff a b c).2 ⟨?_, ?_, hc⟩
+        · by_contra ha
+          have : ((c / a, 0) : K × K) ∈ Forbidden a b c := by
+            simp only [Forbidden, Set.mem_setOf_eq, mul_zero, add_zero]
+            exact mul_div_cancel₀ c ha
+          rw [h] at this; exact this
+        · by_contra hb
+          have : ((0, c / b) : K × K) ∈ Forbidden a b c := by
+            simp only [Forbidden, Set.mem_setOf_eq, mul_zero, zero_add]
+            exact mul_div_cancel₀ c hb
+          rw [h] at this; exact this
+      rw [huniv] at h
+      exact (Set.univ_nonempty.ne_empty h)
+  · rintro ⟨ha, hb, hc⟩
+    ext p
+    simp only [Forbidden, Set.mem_setOf_eq, ha, hb, zero_mul, add_zero,
+      Set.mem_empty_iff_false, iff_false]
+    exact fun h => hc h.symm
+
+/-- **Transversal case.**  A non-degenerate runner (`(a,b) ≠ 0`) forbids a *proper line*:
+its cardinality is exactly `|K|` (codimension 1).  Together with `forbidden_univ_iff` and
+`forbidden_empty_iff` this is the full apex trichotomy.  The apex of HYP-2101 is precisely the
+runner that fails this — its covector is `0`, so it is the whole plane instead of a line. -/
+theorem card_forbidden_eq (a b c : K) (h : a ≠ 0 ∨ b ≠ 0) :
+    Nat.card (Forbidden a b c) = Nat.card K := by
+  rcases eq_or_ne b 0 with hb | hb
+  · subst hb
+    have ha : a ≠ 0 := h.resolve_right (by simp)
+    have e : ↥(Forbidden a 0 c) ≃ K :=
+      { toFun := fun p => (p : K × K).2
+        invFun := fun r => ⟨(c / a, r), by
+          show a * (c / a) + 0 * r = c
+          rw [mul_div_cancel₀ c ha, zero_mul, add_zero]⟩
+        left_inv := by
+          rintro ⟨⟨x, y⟩, hxy⟩
+          simp only [Forbidden, Set.mem_setOf_eq, zero_mul, add_zero] at hxy
+          apply Subtype.ext
+          show ((c / a, y) : K × K) = (x, y)
+          have hx : c / a = x := by rw [div_eq_iff ha]; linear_combination -hxy
+          rw [hx]
+        right_inv := fun r => rfl }
+    rw [Nat.card_congr e]
+  · have e : ↥(Forbidden a b c) ≃ K :=
+      { toFun := fun p => (p : K × K).1
+        invFun := fun s => ⟨(s, (c - a * s) / b), by
+          show a * s + b * ((c - a * s) / b) = c
+          field_simp; ring⟩
+        left_inv := by
+          rintro ⟨⟨x, y⟩, hxy⟩
+          simp only [Forbidden, Set.mem_setOf_eq] at hxy
+          apply Subtype.ext
+          show ((x, (c - a * x) / b) : K × K) = (x, y)
+          have hy : (c - a * x) / b = y := by rw [div_eq_iff hb]; linear_combination -hxy
+          rw [hy]
+        right_inv := fun s => rfl }
+    rw [Nat.card_congr e]
+
 end Field
+
+/-! ## The lift: adjoining the `r/p` coordinate restores the apex to codimension 1
+
+In `𝔸²` the apex covector is `(0,0)`, so its forbidden set is the *whole plane*
+(`forbidden_univ_iff`) and the certificate locus is empty.  S559's `r/p` lift adds a third
+coordinate `u` with a nonzero coefficient `d` (the apex speed mod `p`, a unit).  In `𝔸³` the
+*same* apex — now `(0, 0, d)` with `d ≠ 0` — forbids only a proper hyperplane: `|K|²` of the
+`|K|³` points, a `1/q` slice.  This is the formal content of "the lift restores transversality
+at the apex": the whole-plane forbidder becomes codimension 1. -/
+
+section Lift
+
+variable {K : Type*} [Field K]
+
+/-- A runner in the lifted (3-coordinate) plane: covector `(a, b, d)`, target `c`. -/
+def Forbidden3 (a b d c : K) : Set (K × K × K) :=
+  {p | a * p.1 + b * p.2.1 + d * p.2.2 = c}
+
+/-- **Apex-lift.**  The degenerate apex covector `(0,0)` — the whole plane in `𝔸²` — becomes a
+proper hyperplane in `𝔸³` once the lift coefficient `d` is nonzero: its cardinality is `|K|²`
+(rather than the full `|K|³`).  Formal statement of "the `r/p` lift restores codimension 1." -/
+theorem card_apex_lift (d : K) (hd : d ≠ 0) :
+    Nat.card (Forbidden3 0 0 d 0) = Nat.card K * Nat.card K := by
+  have e : (K × K) ≃ ↥(Forbidden3 0 0 d 0) :=
+    { toFun := fun xy => ⟨(xy.1, xy.2, 0), by simp [Forbidden3]⟩
+      invFun := fun p => ((p : K × K × K).1, (p : K × K × K).2.1)
+      left_inv := fun _ => rfl
+      right_inv := by
+        rintro ⟨⟨x, y, z⟩, hz⟩
+        simp only [Forbidden3, Set.mem_setOf_eq, zero_mul, zero_add] at hz
+        have hz0 : z = 0 := (mul_eq_zero.1 hz).resolve_left hd
+        subst hz0
+        rfl }
+  rw [← Nat.card_congr e, Nat.card_prod]
+
+/-- The lifted apex is a genuine codimension-1 hyperplane: its size times `|K|` is the whole
+space `|K|³`.  Contrast `forbidden_univ_iff`, where the unlifted apex *is* the whole plane. -/
+theorem card_apex_lift_codim (d : K) (hd : d ≠ 0) :
+    Nat.card (Forbidden3 0 0 d 0) * Nat.card K = Nat.card (K × K × K) := by
+  rw [card_apex_lift d hd, Nat.card_prod, Nat.card_prod, Nat.mul_assoc]
+
+end Lift
 
 /-! ## The certificate count over the torus `Kˣ × Kˣ` (the quantitative extension)
 
