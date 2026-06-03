@@ -11,3 +11,4 @@ import Math.LonelyRunner.ApexCertificate
 import Math.LonelyRunner.OwnerCongruence
 import Math.LonelyRunner.SumFree
 import Math.LonelyRunner.Fusion
+import Math.LonelyRunner.FractalSumFree
