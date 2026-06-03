@@ -17,6 +17,7 @@ import Math.LonelyRunner.DangerBlocks
 import Math.LonelyRunner.UnitClock
 import Math.LonelyRunner.DangerCount
 import Math.LonelyRunner.CoveringDepth
+import Math.LonelyRunner.UnitDistance
 import Math.LonelyRunner.DepthGenerating
 import Math.LonelyRunner.FlowShell
 import Math.LonelyRunner.KrawtchoukNormalization
