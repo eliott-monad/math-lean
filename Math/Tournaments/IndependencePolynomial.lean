@@ -1,7 +1,7 @@
 /-
 # Tournaments — the independence polynomial, the H-invariant, and the free `3^k` baseline
 
-Provenance: `eliottcassidy2000/math` — HYP-2240 (S624b).  The tournament invariant `H(T) = I(Ω(T), 2)` (the number
+Provenance: `eliottcassidy2000/math` — HYP-2245 (S624b).  The tournament invariant `H(T) = I(Ω(T), 2)` (the number
 of Hamiltonian paths, Rédei) is the **hard-core partition function** of the 3-cycle conflict graph `Ω` evaluated at
 `x = 2` — the same partition-function object as the LRC covering-depth generating function (`DepthGenerating.lean`)
 and the unit-distance count.  Its **forbidden values 7, 21, 63 = 7·3^k** are gaps in the achievable spectrum (verified
