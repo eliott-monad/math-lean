@@ -10,3 +10,4 @@ import Math.Krawtchouk.Basic
 import Math.LonelyRunner.ApexCertificate
 import Math.LonelyRunner.OwnerCongruence
 import Math.LonelyRunner.SumFree
+import Math.LonelyRunner.Fusion
