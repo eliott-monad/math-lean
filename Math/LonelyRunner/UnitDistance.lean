@@ -1,7 +1,7 @@
 /-
 # Unit distances and the Lonely Runner — the chord/arc bridge
 
-Provenance: `eliottcassidy2000/math` — HYP-2230 (S623).  The Erdős unit-distance problem and the Lonely Runner are
+Provenance: `eliottcassidy2000/math` — HYP-2235 (S623).  The Erdős unit-distance problem and the Lonely Runner are
 the same question on the unit circle, linked by the chord/arc identity.  Two points at clock-arc `x` apart on the
 unit circle are at Euclidean (chord) distance `2·sin(π·dZ x)`, where `dZ x` is the distance to the nearest integer
 (the LRC clock metric, `Math.LonelyRunner.dZ`).  Hence a **unit distance** (chord `= 1`) occurs **iff `dZ x = 1/6`**
