@@ -19,6 +19,7 @@ import Math.LonelyRunner.DangerCount
 import Math.LonelyRunner.CoveringDepth
 import Math.LonelyRunner.DepthGenerating
 import Math.LonelyRunner.FlowShell
+import Math.LonelyRunner.KrawtchoukNormalization
 import Math.Collatz.Resonance
 import Math.Collatz.Parity
 import Math.IteratedLog.Altitude
