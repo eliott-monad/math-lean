@@ -1,0 +1,53 @@
+---
+id: THM-338-impossible-h-values
+source: 01-canon/theorems/THM-338-impossible-h-values.md
+source_commit: 9f7fc6e
+status: open
+---
+
+## Informal statement
+
+---
+theorem: THM-338
+name: Impossible H Values at n=5 (H=7 Gap)
+status: PROVED
+session: opus-2026-05-27-S2
+verified: exhaustive enumeration of all 2^10=1024 labeled 5-vertex tournaments
+depends_on: THM-002 (OCF = H = I(Ω,2))
+---
+
+## Statement
+
+For n=5, the achievable values of H(T) are exactly: {1, 3, 5, 9, 11, 13, 15}.
+
+**H=7 is impossible** for any tournament on 5 vertices.
+
+More generally, the pattern of gaps in achievable H at n=5 is: {7} (only H=7 is missing from {1,3,5,...,15}).
+
+## Proof via OCF
+
+By the Odd-Cycle Formula (Grinberg-Stanley, THM-002):
+H(T) = I(Ω(T), 2) = Σ_{I⊆Ω independent} 2^{|I|}
+     = 1 + 2α₁ + 4α₂ + 8α₃ + ...
+
+where αₖ = #{independent sets of size k in the cycle conflict graph Ω(T)}.
+
+For H=7, we need: 1 + 2α₁ + 4α₂ + ... = 7, so 2α₁ + 4α₂ + ... = 6.
+
+Since α₁ ≥ 0, α₂ ≥ 0, and all terms are non-negative, the solutions are:
+- (α₁, α₂) = (3, 0): three odd cycles, no two vertex-disjoint
+- (α₁, α₂) = (1, 1): impossible (a cycle cannot form a disjoint pair with itself; α₂≥1 requires α₁≥2)
+
+**Case (1,1) is impossible:** α₂=1 means there exists one pair of vertex-disjoint odd cycles. But then α₁ ≥ 2 (each cycle counts separately). So (α₁,α₂) ≠ (1,1). Similarly, any higher-order term α₃,... with 8α₃+...=6 has no non-negative solution.
+
+**Case (3,0): Three odd cycles, all pairwise sharing a vertex.**
+
+At n=5, odd cycles have length 3 or 5. If any cycle has length 5, it uses all 5 vertices — it cannot share a vertex with all other cycles AND have those cycles be vertex-disjoint from... actually if a 5-cycle exists, it uses all vertices. A second cycle (even length 3) must share a vertex with it, but then T also has a 3-cycle. So α₁ ≥ 2, but we need to check α₂.
+
+**Why (3,0) is impossible at n=5:** At n=5, three pairwise-intersecting odd cycles would need to share vertices such that no two are disjoint. Since each cycle has length ≥3 and uses ≥3 vertices, three pairwise-intersecting cycles on 5 vertices must all share at least one common vertex v (if no, then each pair shares a different vertex, which on 5 vertices would require cycles to be very large or overlap heavily).
+
+**Direct verification:** Exhaustive computation of all 1024 labeled tournaments on 5 vertices yields:
+
+## Notes for the formalizer
+
+(none yet)
