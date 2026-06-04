@@ -23,6 +23,7 @@ import Math.LonelyRunner.UnitClock
 import Math.LonelyRunner.DangerCount
 import Math.LonelyRunner.CoveringDepth
 import Math.LonelyRunner.UnitDistance
+import Math.LonelyRunner.UnitDistanceCarrier
 import Math.LonelyRunner.DepthGenerating
 import Math.LonelyRunner.FlowShell
 import Math.LonelyRunner.KrawtchoukNormalization
