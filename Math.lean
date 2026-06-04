@@ -29,6 +29,7 @@ import Math.LonelyRunner.FlowShell
 import Math.LonelyRunner.KrawtchoukNormalization
 import Math.LonelyRunner.DelsarteLP
 import Math.LonelyRunner.BalancedRelation
+import Math.LonelyRunner.PairSumModulus
 import Math.Collatz.Resonance
 import Math.Collatz.Parity
 import Math.IteratedLog.Altitude
