@@ -7,6 +7,7 @@ import Math.Tournaments.HamiltonianPaths
 import Math.Tournaments.Inshat
 import Math.Tournaments.IndependencePolynomial
 import Math.Tournaments.ForbiddenHSpectrum
+import Math.Tournaments.Paley
 import Math.FormalGroup.Basic
 import Math.PathHomology.Basic
 import Math.Krawtchouk.Basic
