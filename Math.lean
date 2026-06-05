@@ -10,6 +10,7 @@ import Math.Tournaments.Jacobsthal
 import Math.Tournaments.CyclotomicSeven
 import Math.Tournaments.ForbiddenHSpectrum
 import Math.Tournaments.Paley
+import Math.Tournaments.Staircase
 import Math.FormalGroup.Basic
 import Math.PathHomology.Basic
 import Math.Krawtchouk.Basic
