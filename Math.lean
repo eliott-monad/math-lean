@@ -11,6 +11,7 @@ import Math.Tournaments.CyclotomicSeven
 import Math.Tournaments.ForbiddenHSpectrum
 import Math.Tournaments.Paley
 import Math.Tournaments.Staircase
+import Math.Tournaments.IntervalReversal
 import Math.FormalGroup.Basic
 import Math.PathHomology.Basic
 import Math.Krawtchouk.Basic
