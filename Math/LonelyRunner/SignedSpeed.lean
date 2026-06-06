@@ -1,7 +1,7 @@
 /-
 # Lonely Runner — signed speeds (directions): the σ gauge, and difference ↦ sum
 
-Provenance: `eliottcassidy2000/math` — HYP-2280 (S631).  Allowing a runner to move in the opposite direction is the
+Provenance: `eliottcassidy2000/math` — HYP-2285 (S631).  Allowing a runner to move in the opposite direction is the
 sign flip `v ↦ −v`, the antipodal involution `σ`.  Since the clock distance is even (`dZ_neg`), **loneliness is
 sign-invariant**: the forbidden arc of `−v` equals that of `v`, so the gap depends only on `|speeds|` — the sign is a
 *gauge* freedom (the σ-quotient is the physical object).  "Every other runner counterclockwise" is the even/odd
