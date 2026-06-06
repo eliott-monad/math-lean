@@ -1,7 +1,7 @@
 /-
 # Tie induction for graph colorings: adding ties (removing edges) only lowers the chromatic number
 
-Provenance: `eliottcassidy2000/math` — HYP-2295 (S633).  "Everything as a coloring": the resonance/3-cycle structure
+Provenance: `eliottcassidy2000/math` — HYP-2299 (S633).  "Everything as a coloring": the resonance/3-cycle structure
 is the odd-cycle obstruction to 2-coloring (the triangle needs 3 colors), and the unit-distance graph's chromatic
 number is the Hadwiger–Nelson problem.  **Tie induction** is the monotonicity of colorings: a *tie* is a removed
 edge, and removing edges (`G ≤ H`) only makes coloring easier — a proper coloring of `H` restricts to one of `G`, so
