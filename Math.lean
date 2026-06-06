@@ -45,3 +45,4 @@ import Math.Foundations.RecursiveFourthFace
 import Math.Moser.LayeredSlabs
 import Math.Combinatorics.ChromaticTieInduction
 import Math.Combinatorics.HadwigerNelsonBridge
+import Math.Combinatorics.AlternatingGroupGraph
