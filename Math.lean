@@ -40,3 +40,4 @@ import Math.Transcendence.SumProduct
 import Math.NumberTheory.GoldbachLemoine
 import Math.SetTheory.ContinuumHypothesisCarrier
 import Math.Foundations.RecursiveFourthFace
+import Math.Moser.LayeredSlabs
