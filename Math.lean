@@ -47,3 +47,4 @@ import Math.Combinatorics.ChromaticTieInduction
 import Math.Combinatorics.HadwigerNelsonBridge
 import Math.Combinatorics.AlternatingGroupGraph
 import Math.Polynomial.RootCount
+import Math.Combinatorics.HexagonalSevenColoring
