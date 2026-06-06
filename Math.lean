@@ -43,3 +43,4 @@ import Math.NumberTheory.PerfectMersenne
 import Math.SetTheory.ContinuumHypothesisCarrier
 import Math.Foundations.RecursiveFourthFace
 import Math.Moser.LayeredSlabs
+import Math.Combinatorics.ChromaticTieInduction
