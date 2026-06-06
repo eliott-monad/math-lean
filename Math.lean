@@ -29,6 +29,7 @@ import Math.LonelyRunner.UnitDistance
 import Math.LonelyRunner.UnitDistanceCarrier
 import Math.LonelyRunner.DepthGenerating
 import Math.LonelyRunner.FlowShell
+import Math.LonelyRunner.SignedSpeed
 import Math.LonelyRunner.KrawtchoukNormalization
 import Math.LonelyRunner.DelsarteLP
 import Math.LonelyRunner.BalancedRelation
