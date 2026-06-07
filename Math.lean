@@ -52,3 +52,4 @@ import Math.Tournaments.PaleyRado
 import Math.LonelyRunner.HalfTurnParity
 import Math.LonelyRunner.SevenClockFiber
 import Math.UnitDistance.EisensteinNeighbors
+import Math.Galois.CommutatorDepth
