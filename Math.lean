@@ -56,3 +56,4 @@ import Math.Galois.CommutatorDepth
 import Math.Tournaments.AutOddOrder
 import Math.Combinatorics.PochhammerSign
 import Math.Tournaments.SkewDiscriminant
+import Math.Tournaments.PfaffianParity
