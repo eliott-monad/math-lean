@@ -50,3 +50,4 @@ import Math.Polynomial.RootCount
 import Math.Combinatorics.HexagonalSevenColoring
 import Math.Tournaments.PaleyRado
 import Math.LonelyRunner.HalfTurnParity
+import Math.LonelyRunner.SevenClockFiber
