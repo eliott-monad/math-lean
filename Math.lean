@@ -64,3 +64,4 @@ import Math.NumberTheory.HeegnerNineteen
 import Math.Combinatorics.InclusionExclusionTriangle
 import Math.Combinatorics.Cochromatic
 import Math.Combinatorics.CochromaticBound
+import Math.Combinatorics.InvolutionAverage
