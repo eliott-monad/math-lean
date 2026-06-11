@@ -57,6 +57,7 @@ import Math.Tournaments.AutOddOrder
 import Math.Combinatorics.PochhammerSign
 import Math.Tournaments.SkewDiscriminant
 import Math.Tournaments.PfaffianParity
+import Math.Tournaments.SwitchingDeterminant
 import Math.LonelyRunner.Friendliness
 import Math.LonelyRunner.LonelyFourteen
 import Math.LonelyRunner.LonelyNineteen
