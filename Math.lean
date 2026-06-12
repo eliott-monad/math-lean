@@ -40,6 +40,7 @@ import Math.IteratedLog.Altitude
 import Math.Transcendence.SumProduct
 import Math.NumberTheory.GoldbachLemoine
 import Math.NumberTheory.PerfectMersenne
+import Math.NumberTheory.InvolutionModulus
 import Math.SetTheory.ContinuumHypothesisCarrier
 import Math.Foundations.RecursiveFourthFace
 import Math.Moser.LayeredSlabs
