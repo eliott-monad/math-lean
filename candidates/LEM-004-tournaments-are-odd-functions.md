@@ -49,4 +49,8 @@ Interpretation: a global sign flip of the coordinate is complementation (σ ↦ 
 
 ## Notes for the formalizer
 
-(none yet)
+2026-06-12: The formal-group oddness component (part (d), concrete over `ℝ`) is now
+formalized in `Math/FormalGroup/Basic.lean`: `F x (-x) = 0`, `F (-x) x = 0`,
+`F (-x) (-y) = -F x y`, and the one-sided subtraction identities.  The broader
+odd-function dictionary remains open: parts (a), (b), and the cherry/spectral
+claims in (c) still need separate formalization.
