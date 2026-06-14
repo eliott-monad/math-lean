@@ -3,6 +3,7 @@
 -- Provenance for every theorem links back to its informal source (see each file's header).
 
 import Math.Tournaments.Basic
+import Math.Tournaments.OddCycleSpectrum
 import Math.Tournaments.HamiltonianPaths
 import Math.Tournaments.Inshat
 import Math.Tournaments.IndependencePolynomial
