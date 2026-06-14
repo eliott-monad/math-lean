@@ -50,4 +50,9 @@ This resolves OPEN-Q-001: the "n=5 mystery" is no mystery at all. 5-cycles exist
 
 ## Notes for the formalizer
 
-(none yet)
+2026-06-14: Formalized the finite-support core in `Math/Tournaments/SmallMu.lean`:
+after removing the three distinct vertices of a triangle from a tournament with
+at most five vertices, at most two vertices remain (`remaining_vertices_after_triangle_le_two`,
+`remaining_vertices_after_triangle_lt_three`).  The full statement is still open
+until the repo has definitions for the `mu(C)` conflict graph and its independence
+polynomial specialization.
