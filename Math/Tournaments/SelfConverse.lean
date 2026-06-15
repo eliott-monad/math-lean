@@ -2,7 +2,8 @@
 # Self-converse tournaments and the perspective flip
 
 Provenance: `eliottcassidy2000/math` -
-`01-canon/theorems/THM-409-self-converse-perspective-flip-involution.md`.
+`01-canon/theorems/THM-409-self-converse-perspective-flip-involution.md` and
+`01-canon/theorems/THM-280-grid-reflection-is-complement.md`.
 
 This file formalizes the algebraic core of THM-409.  Anti-automorphisms of a
 tournament are exactly the isomorphisms to the converse tournament; once one exists,
@@ -10,7 +11,7 @@ they form both a left and a right coset of the automorphism group.  Consequently
 anti-automorphism induces the same involution on the quotient of vertices by
 automorphism orbit.
 -/
-import Math.Tournaments.Basic
+import Math.Tournaments.HamiltonianPaths
 
 namespace Math.Tournaments
 
@@ -22,6 +23,28 @@ def IsAutomorphism {V : Type*} (T : Tournament V) (σ : Equiv.Perm V) : Prop :=
 converse tournament. -/
 def IsAntiAutomorphism {V : Type*} (T : Tournament V) (σ : Equiv.Perm V) : Prop :=
   ∀ x y, T.beats x y ↔ T.beats (σ y) (σ x)
+
+/-- A permutation identifies `T` with its complement when it sends each arc of `T`
+to an arc of the complement tournament. -/
+def IsComplementRelabeling {V : Type*} (T : Tournament V) (σ : Equiv.Perm V) : Prop :=
+  ∀ x y, T.beats x y ↔ T.complement.beats (σ x) (σ y)
+
+/-- **THM-280, abstract relabeling core.**  A relabeling reverses every arc of `T`
+exactly when it identifies `T` with its complement tournament.
+In the staircase model of THM-280, the grid reflection supplies such a relabeling,
+so this is the tournament-theoretic content of "reflection equals complement up to
+isomorphism." -/
+theorem isAntiAutomorphism_iff_isComplementRelabeling {V : Type*}
+    (T : Tournament V) (σ : Equiv.Perm V) :
+    IsAntiAutomorphism T σ ↔ IsComplementRelabeling T σ := by
+  constructor
+  · intro h x y
+    change T.beats x y ↔ T.beats (σ y) (σ x)
+    exact h x y
+  · intro h x y
+    specialize h x y
+    change T.beats x y ↔ T.beats (σ y) (σ x) at h
+    exact h
 
 namespace IsAutomorphism
 
