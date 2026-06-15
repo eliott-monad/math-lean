@@ -65,6 +65,7 @@ import Math.Tournaments.SwitchingDeterminant
 import Math.LonelyRunner.Friendliness
 import Math.LonelyRunner.LonelyFourteen
 import Math.LonelyRunner.LonelyNineteen
+import Math.LonelyRunner.SingularSeries
 import Math.NumberTheory.HeegnerNineteen
 import Math.Combinatorics.InclusionExclusionTriangle
 import Math.Combinatorics.Cochromatic
