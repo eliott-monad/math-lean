@@ -16,6 +16,7 @@ import Math.Tournaments.Staircase
 import Math.Tournaments.IntervalReversal
 import Math.Tournaments.SelfConverse
 import Math.FormalGroup.Basic
+import Math.FormalGroup.NFoldSum
 import Math.PathHomology.Basic
 import Math.Krawtchouk.Basic
 import Math.LonelyRunner.ApexCertificate
