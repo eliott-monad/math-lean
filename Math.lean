@@ -68,6 +68,7 @@ import Math.LonelyRunner.LonelyFourteen
 import Math.LonelyRunner.LonelyNineteen
 import Math.LonelyRunner.SingularSeries
 import Math.NumberTheory.HeegnerNineteen
+import Math.NumberTheory.GeneralBaseQRCongruence
 import Math.Combinatorics.InclusionExclusionTriangle
 import Math.Combinatorics.Cochromatic
 import Math.Combinatorics.CochromaticBound
