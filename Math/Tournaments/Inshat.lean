@@ -1,8 +1,10 @@
 /-
-# THM-004 (F1): the inshat algebraic identity for binary signatures
+# THM-004 (F1): the inshat algebraic identity for binary signatures; THM-006 (F3):
+the minimum Type-II count forced by a `1 ... 0` signature window
 
 Provenance: `eliottcassidy2000/math` — `01-canon/theorems/THM-004-f1-algebraic-identity.md`
-(source commit `c0fda1c`).
+(source commit `c0fda1c`) and `01-canon/theorems/THM-006-f3-min-typeii.md`
+(source commit `9f7fc6e`).
 
 When a vertex `v` is inserted into a Hamiltonian path `P'` of `T − v`, the number of
 resulting Hamiltonian paths of `T`, written `inshat v P'`, depends only on the binary
@@ -83,5 +85,28 @@ theorem inshat_eq (a : Bool) (l : List Bool) :
 theorem inshat_sub_one_div_two (a : Bool) (l : List Bool) :
     (inshat (a :: l) - 1) / 2 = descents (a :: l) := by
   rw [inshat_eq]; omega
+
+/-- **THM-006 (F3), Boolean core.** Any signature window whose first bit is `1`
+and whose last bit is `0` has at least one Type-II position. In the tournament
+application, the endpoints come from the arcs `v → P[j]` and `P[j+L-2] → v`
+of the consecutively embedded odd cycle. -/
+theorem exists_typeII_of_first_true_last_false (l : List Bool)
+    (hlast : lastB (true :: l) = false) :
+    0 < descents (true :: l) := by
+  have h := descents_add_last true l
+  rw [hlast] at h
+  simp at h
+  omega
+
+/-- The monotone signature pattern `1, ..., 1, 0` has exactly one Type-II
+position, so the lower bound in THM-006 is sharp. -/
+theorem descents_replicate_true_append_false (n : ℕ) :
+    descents (List.replicate (n + 1) true ++ [false]) = 1 := by
+  suffices h : ∀ n : ℕ, descents (true :: List.replicate n true ++ [false]) = 1 by
+    simpa [List.replicate] using h n
+  intro n
+  induction n with
+  | zero => rfl
+  | succ n ih => simpa [List.replicate, descents] using ih
 
 end Math.Tournaments
