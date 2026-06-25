@@ -12,6 +12,7 @@ import Math.Tournaments.Jacobsthal
 import Math.Tournaments.CyclotomicSeven
 import Math.Tournaments.ForbiddenHSpectrum
 import Math.Tournaments.Paley
+import Math.Tournaments.CayleyBoost
 import Math.Tournaments.Staircase
 import Math.Tournaments.IntervalReversal
 import Math.Tournaments.SelfConverse
