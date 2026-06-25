@@ -44,6 +44,7 @@ import Math.IteratedLog.Altitude
 import Math.Transcendence.SumProduct
 import Math.NumberTheory.GoldbachLemoine
 import Math.NumberTheory.PerfectMersenne
+import Math.NumberTheory.KnacciMersenne
 import Math.NumberTheory.InvolutionModulus
 import Math.NumberTheory.FibonacciProduct
 import Math.SetTheory.ContinuumHypothesisCarrier

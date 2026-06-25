@@ -2,7 +2,7 @@
 id: THM-227-knacci-mersenne
 source: 01-canon/theorems/THM-227-knacci-mersenne.md
 source_commit: 9f7fc6e
-status: open
+status: blocked
 ---
 
 ## Informal statement
@@ -47,6 +47,18 @@ Base case: t(1) = (empty sum) + 1 = 1 = 2^1 - 1.
 
 Inductive step: Assume t(m) = 2^m - 1 for 1 <= m <= n-1 (where n <= k). Then:
 
-## Notes for the formalizer
+## Formalization notes
 
-(none yet)
+2026-06-24: `Math.NumberTheory.KnacciMersenne` formalizes the Newton-range recurrence
+engine:
+
+```text
+t 0 = 0
+t n = (sum m < n, t m) + n  for 1 <= n <= k
+------------------------------------------------
+t n = 2^n - 1               for n <= k
+```
+
+The remaining blocker for closing the candidate is the matrix-specific bridge:
+define the k-nacci companion matrix and prove its trace sequence satisfies the displayed
+Newton recurrence on `1..k`.
