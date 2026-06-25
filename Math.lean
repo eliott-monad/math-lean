@@ -26,6 +26,7 @@ import Math.LonelyRunner.Fusion
 import Math.LonelyRunner.FractalSumFree
 import Math.LonelyRunner.DangerBlocks
 import Math.LonelyRunner.UnitClock
+import Math.LonelyRunner.DenominatorSieve
 import Math.LonelyRunner.DoublingRigidity
 import Math.LonelyRunner.DangerCount
 import Math.LonelyRunner.CoveringDepth
