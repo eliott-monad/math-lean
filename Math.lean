@@ -6,6 +6,7 @@ import Math.Tournaments.Basic
 import Math.Tournaments.OddCycleSpectrum
 import Math.Tournaments.SmallMu
 import Math.Tournaments.HamiltonianPaths
+import Math.Tournaments.HamiltonianPathAutomorphism
 import Math.Tournaments.Inshat
 import Math.Tournaments.IndependencePolynomial
 import Math.Tournaments.Jacobsthal

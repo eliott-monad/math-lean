@@ -2,7 +2,7 @@
 id: LEM-003-aut-acts-freely-on-ham-paths
 source: 01-canon/theorems/LEM-003-aut-acts-freely-on-ham-paths.md
 source_commit: c21c071
-status: open
+status: blocked
 ---
 
 ## Informal statement
@@ -50,4 +50,13 @@ Paths are **order-rigid** (unique source anchors an induction); cycles are not. 
 
 ## Notes for the formalizer
 
-(none yet)
+2026-06-25: `Math/Tournaments/HamiltonianPathAutomorphism.lean` formalizes the
+ordered-path freeness core for the representation used by `hamiltonianPathCount`:
+an automorphism preserving a directed Hamiltonian vertex order as a list is the identity.
+
+Remaining blocker before deleting this candidate: formalize the arc-set representation
+claimed in the informal statement.  In particular, define the adjacent arc set of a
+list path and prove that a nodup spanning directed path is reconstructed from this
+arc set by its unique source and successive unique outgoing arcs.  Once that bridge is
+available, the stated arc-set order-rigidity and orbit/divisibility corollaries should
+follow from the ordered-list theorem.
