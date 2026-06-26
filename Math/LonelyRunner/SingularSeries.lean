@@ -48,6 +48,30 @@ theorem sinc7_eq_zero_iff_dvd_seven {t : ℤ} (ht : t ≠ 0) :
     rw [harg, Real.sin_int_mul_pi]
     simp
 
+/-- Any coefficient divisible by the apex prime `7` kills its sinc factor.  This
+includes `t = 0`, where the denominator convention also gives value `0`. -/
+theorem sinc7_eq_zero_of_seven_dvd {t : ℤ} (ht : (7 : ℤ) ∣ t) : sinc7 t = 0 := by
+  by_cases hzero : t = 0
+  · simp [sinc7, hzero]
+  · exact (sinc7_eq_zero_iff_dvd_seven hzero).2 ht
+
+/-- The elementary absolute bound used in the THM-503 pairwise convergence estimate. -/
+theorem abs_sinc7_le (t : ℤ) :
+    |sinc7 t| ≤ 1 / (Real.pi * |(t : ℝ)|) := by
+  by_cases ht : t = 0
+  · simp [sinc7, ht]
+  · have htR : (t : ℝ) ≠ 0 := by exact_mod_cast ht
+    have hden_pos : 0 < Real.pi * |(t : ℝ)| :=
+      mul_pos Real.pi_pos (abs_pos.2 htR)
+    calc
+      |sinc7 t| =
+          |Real.sin (Real.pi * (t : ℝ) / 7)| / |Real.pi * (t : ℝ)| := by
+            rw [sinc7, abs_div]
+      _ = |Real.sin (Real.pi * (t : ℝ) / 7)| / (Real.pi * |(t : ℝ)|) := by
+            rw [abs_mul, abs_of_pos Real.pi_pos]
+      _ ≤ 1 / (Real.pi * |(t : ℝ)|) :=
+            div_le_div_of_nonneg_right (Real.abs_sin_le_one _) hden_pos.le
+
 end
 
 end Math.LonelyRunner
