@@ -80,4 +80,5 @@ import Math.Combinatorics.InclusionExclusionTriangle
 import Math.Combinatorics.Cochromatic
 import Math.Combinatorics.CochromaticBound
 import Math.Combinatorics.InvolutionAverage
+import Math.Combinatorics.DelannoyIdentity
 import Math.Tournaments.HalfTiling
