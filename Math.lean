@@ -81,4 +81,5 @@ import Math.Combinatorics.Cochromatic
 import Math.Combinatorics.CochromaticBound
 import Math.Combinatorics.InvolutionAverage
 import Math.Combinatorics.DelannoyIdentity
+import Math.Combinatorics.FibbinaryMoserCarrier
 import Math.Tournaments.HalfTiling
