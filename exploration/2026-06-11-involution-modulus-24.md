@@ -27,3 +27,28 @@ A clean future proof should factor through prime powers.  The obstruction cases 
 This suggests the next Lean target is not more computation at `24`, but a reusable lemma:
 exponent-two unit groups descend along `ZMod.cast` to divisors.  With that in place, the
 classification becomes a local prime-power argument.
+
+## 2026-06-27 Lean closure
+
+The global classification is now formalized in
+`Math/NumberTheory/InvolutionModulus.lean`:
+
+```lean
+theorem unitsExponentTwo_iff_dvd_twentyFour {n : ℕ} (hn : n ≠ 0) :
+    UnitsExponentTwo n ↔ n ∣ 24
+```
+
+The clean invariant was exactly Mathlib's Carmichael function:
+
+```lean
+UnitsExponentTwo n ↔ ArithmeticFunction.carmichael n ∣ 2
+```
+
+For positive `n`, the proof factors through `Nat.factorization`.  Each prime-power
+part `p^k ∣ n` inherits `λ(p^k) ∣ 2`; Mathlib's prime-power formulas then force
+`p=2, k≤3` or `p=3, k=1`, which is precisely `n ∣ 2^3·3 = 24`.
+
+This is a useful reusable pattern for future modulus-classification candidates:
+translate a universal unit identity into a Carmichael-exponent divisibility statement,
+then prove the classification on prime powers rather than constructing CRT witnesses
+by hand.
