@@ -61,6 +61,7 @@ import Math.Combinatorics.HexagonalSevenColoring
 import Math.Tournaments.PaleyRado
 import Math.LonelyRunner.HalfTurnParity
 import Math.LonelyRunner.SevenClockFiber
+import Math.LonelyRunner.AntipodalInvolution
 import Math.UnitDistance.EisensteinNeighbors
 import Math.UnitDistance.ChordSpectrum
 import Math.UnitDistance.DeletionLadder
